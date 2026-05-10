@@ -1,3 +1,14 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -6,12 +17,12 @@ jobs:
 
       - uses: pnpm/action-setup@v3
         with:
-          version: 9 # Ou la version que tu utilises localement
+          version: 9
 
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'pnpm' # On utilise le cache pnpm ici
+          cache: 'pnpm'
 
       - run: pnpm install
       - run: pnpm run build
