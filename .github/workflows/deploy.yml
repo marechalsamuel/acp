@@ -1,25 +1,21 @@
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ "main" ] # Vérifie bien que ta branche s'appelle main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9 # Ou la version que tu utilises localement
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
-      - run: npm install
-      - run: npm run build
+          node-version: 24
+          cache: 'pnpm' # On utilise le cache pnpm ici
+
+      - run: pnpm install
+      - run: pnpm run build
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
