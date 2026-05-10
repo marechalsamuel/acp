@@ -73,7 +73,7 @@ export const PCAImageCompressor = () => {
     // Charger l'image par défaut au démarrage
     const img = new Image()
     img.onload = () => onImgLoad(img)
-    img.src = "/cameraman.png"
+    img.src = `${import.meta.env.BASE_URL}cameraman.png`
   }, [])
 
   // 1. Gérer l'upload et transformer l'image en Matrice
